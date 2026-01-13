@@ -1,74 +1,74 @@
 # gRPC-Web Nginx Reverse Proxy
 
-## Описание проекта
+## Project Description
 
-Содержит готовую конфигурацию **Reverse proxy** для
-проксирования gRPC-Web запросов к gRPC серверу.
+Contains a ready-to-use **Reverse Proxy** configuration for proxying gRPC-Web
+requests to a gRPC server.
 
-### Цель
+### Purpose
 
-Обойти CORS ограничения при работе с gRPC-Web.
+To bypass CORS restrictions when working with gRPC-Web.
 
-### Возможности
+### Features
 
-- **HTTP/2 поддержка** - поддержка HTTP/2 протокола
-- **gRPC-Web совместимость** - обработка gRPC-Web запросов и ответов
-- **CORS** - автоматическая обработка CORS preflight запросов
-- **Trailing headers** - сохранение trailing headers в HTTP/2
-- **Переменные окружения**
+- **HTTP/2 Support** - support for the HTTP/2 protocol
+- **gRPC-Web Compatibility** - handles gRPC-Web requests and responses
+- **CORS** - automatic handling of CORS preflight requests
+- **Trailing Headers** - preserves trailing headers in HTTP/2
+- **Environment Variables** - configurable through environment variables
 
-## Структура проекта
+## Project Structure
 
 ```
 nginx-proxy/
-├── docker-compose.yml      # Docker Compose конфигурация
-├── nginx.conf.template     # Nginx конфиг с переменными окружения
-├── .env.template           # Шаблон для .env
+├── docker-compose.yml      # Docker Compose configuration
+├── nginx.conf.template     # Nginx config with environment variables
+├── .env.template           # Template for .env file
 └── README.md
 ```
 
-## Запуск
+## Running the Project
 
-Необходимо создать .env файл.
+You need to create a .env file first.
 
 ```bash
-# В папке проекта
+# In the project folder
 
-# Поднять контейнер с логами
+# Start the container with logs
 docker-compose up nginx
 ```
 
-## Настройка
+## Configuration
 
-### Переменные окружения (`.env`)
+### Environment Variables (`.env`)
 
-| Переменная          | Описание                                  | Примеры                                   |
-|---------------------|-------------------------------------------|-------------------------------------------|
-| `NGINX_PORT`        | Порт на хосте                             | `8090`, `443`, `80`                       |
-| `NGINX_LISTEN_PORT` | Порт слушания (обычно равен `NGINX_PORT`) | `8090`, `443`, `80`                       |
-| `GRPC_BACKEND`      | Адрес:порт gRPC сервера                   | `localhost:8080`, `api.example.com:50051` |
+| Variable            | Description                                  | Examples                                  |
+|---------------------|----------------------------------------------|-------------------------------------------|
+| `NGINX_PORT`        | Port on the host                             | `8090`, `443`, `80`                       |
+| `NGINX_LISTEN_PORT` | Listening port (usually equals `NGINX_PORT`) | `8090`, `443`, `80`                       |
+| `GRPC_BACKEND`      | Address:port of the gRPC server              | `localhost:8080`, `api.example.com:50051` |
 
-## Команды
+## Commands
 
 ```bash
-# Поднять (с логами)
+# Start (with logs)
 docker-compose up nginx
 
-# Поднять в фоне
+# Start in the background
 docker-compose up -d nginx
 
-# Посмотреть логи
+# View logs
 docker-compose logs -f nginx
 
-# Остановить
+# Stop
 docker-compose stop nginx
 
-# Перезагрузить (перечитает конфиг)
+# Restart (re-reads the config)
 docker-compose restart nginx
 
-# Остановить и удалить контейнер
+# Stop and remove the container
 docker-compose down
 
-# Пересоздать контейнер с новыми переменными
+# Recreate the container with new environment variables
 docker-compose down && docker-compose up -d nginx
 ```
