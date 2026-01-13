@@ -20,7 +20,7 @@
 ## Структура проекта
 
 ```
-nginx-proxy/
+grpc-proxy/
 ├── docker-compose.yml      # Docker Compose конфигурация
 ├── nginx.conf.template     # Nginx конфиг с переменными окружения
 ├── .env.template           # Шаблон для .env

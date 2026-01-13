@@ -20,7 +20,7 @@ To bypass CORS restrictions when working with gRPC-Web.
 ## Project Structure
 
 ```
-nginx-proxy/
+grpc-proxy/
 ├── docker-compose.yml      # Docker Compose configuration
 ├── nginx.conf.template     # Nginx config with environment variables
 ├── .env.template           # Template for .env file
