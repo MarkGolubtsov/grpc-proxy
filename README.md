@@ -63,7 +63,7 @@ docker-compose logs -f nginx
 # Остановить
 docker-compose stop nginx
 
-# Перезагрузить (переочитает конфиг)
+# Перезагрузить (перечитает конфиг)
 docker-compose restart nginx
 
 # Остановить и удалить контейнер
