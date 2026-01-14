@@ -3,7 +3,6 @@ map $http_origin $origin_to_use {
     "~^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$" "$http_origin";
 }
 
-http2_max_field_size 32k;
 large_client_header_buffers 4 32k;
 
 upstream grpc_backend {
