@@ -22,20 +22,23 @@ To bypass CORS restrictions when working with gRPC-Web.
 ```
 grpc-proxy/
 ├── docker-compose.yml      # Docker Compose configuration
+├── Dockerfile              # Dockerfile for building the proxy image
+├── entrypoint.sh           # Initialization and startup script
 ├── nginx.conf.template     # Nginx config with environment variables
-├── .env.template           # Template for .env file
+├── .env.example            # Template for .env file
 └── README.md
 ```
 
 ## Running the Project
 
-You need to create a .env file first.
+You need to create a `.env` file from `.env.example` first.
 
 ```bash
 # In the project folder
+cp .env.example .env
 
-# Start the container with logs
-docker-compose up nginx
+# Start the container (will automatically build the image)
+docker-compose up -d
 ```
 
 ## Configuration

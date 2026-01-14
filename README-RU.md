@@ -22,20 +22,23 @@
 ```
 grpc-proxy/
 ├── docker-compose.yml      # Docker Compose конфигурация
+├── Dockerfile              # Dockerfile для сборки образа прокси
+├── entrypoint.sh           # Скрипт инициализации и запуска
 ├── nginx.conf.template     # Nginx конфиг с переменными окружения
-├── .env.template           # Шаблон для .env
+├── .env.example            # Шаблон для .env
 └── README.md
 ```
 
 ## Запуск
 
-Необходимо создать .env файл.
+Необходимо создать файл `.env` на основе `.env.example`.
 
 ```bash
 # В папке проекта
+cp .env.example .env
 
-# Поднять контейнер с логами
-docker-compose up nginx
+# Поднять контейнер (автоматически соберет образ)
+docker-compose up -d
 ```
 
 ## Настройка
