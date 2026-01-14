@@ -1,6 +1,5 @@
-# HTTP/2 поддержка
 http2_max_field_size 32k;
-http2_max_header_size 32k;
+large_client_header_buffers 4 32k;
 
 upstream grpc_backend {
     server ${GRPC_BACKEND};
@@ -8,8 +7,9 @@ upstream grpc_backend {
 }
 
 server {
-    listen ${NGINX_LISTEN_PORT} http2;
-    listen [::]:${NGINX_LISTEN_PORT} http2;
+    listen ${NGINX_LISTEN_PORT};
+    listen [::]:${NGINX_LISTEN_PORT};
+    http2 on;
     server_name localhost;
 
     # Health check endpoint
@@ -22,7 +22,7 @@ server {
     # gRPC-Web прокси
     location / {
         proxy_pass http://grpc_backend;
-        proxy_http_version 2.0;
+        proxy_http_version 1.1;
         
         proxy_buffering off;
         proxy_request_buffering off;
@@ -33,6 +33,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
         
         proxy_set_header te trailers;
+        proxy_set_header Connection "";
         
         # CORS для gRPC-Web
         add_header Access-Control-Allow-Origin * always;
